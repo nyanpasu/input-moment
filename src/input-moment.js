@@ -6,8 +6,8 @@ import Time from './time';
 
 export default class InputMoment extends Component {
   static defaultProps = {
-    prevMonthIcon: 'ion-ios-arrow-left',
-    nextMonthIcon: 'ion-ios-arrow-right',
+    prevMonthIcon: '<',
+    nextMonthIcon: '>',
     minStep: 1,
     hourStep: 1
   };
