@@ -9,7 +9,8 @@ export default class InputMoment extends Component {
     prevMonthIcon: '<',
     nextMonthIcon: '>',
     minStep: 1,
-    hourStep: 1
+    hourStep: 1,
+    clock: true,
   };
 
   state = {
@@ -36,12 +37,14 @@ export default class InputMoment extends Component {
       minStep,
       hourStep,
       onSave,
+      clock,
       ...props
     } = this.props;
     const cls = cx('m-input-moment', className);
 
     return (
       <div className={cls} {...props}>
+        {clock &&
         <div className="options">
           <button
             type="button"
@@ -58,6 +61,7 @@ export default class InputMoment extends Component {
             Time
           </button>
         </div>
+        }
 
         <div className="tabs">
           <Calendar
