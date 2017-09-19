@@ -4,13 +4,14 @@ import cx from 'classnames';
 import range from 'lodash/range';
 import chunk from 'lodash/chunk';
 
-const Day = ({ i, w, d, className, ...props }) => {
+const Day = ({ i, w, d, disabled, className, ...props }) => {
   const prevMonth = w === 0 && i > 7;
   const nextMonth = w >= 4 && i <= 14;
-  const cls = cx({
+  const cls = cx(className, {
     'prev-month': prevMonth,
     'next-month': nextMonth,
-    'current-day': !prevMonth && !nextMonth && i === d
+    'current-day': !prevMonth && !nextMonth && i === d,
+    'disabled': disabled,
   });
 
   return <td className={cls} {...props}>{i}</td>;
@@ -41,6 +42,7 @@ export default class Calendar extends Component {
   };
 
   render() {
+    const { minDate } = this.props;
     const m = this.props.moment;
     const d = m.date();
     const d1 = m.clone().subtract(1, 'month').endOf('month').date();
@@ -52,6 +54,10 @@ export default class Calendar extends Component {
       range(1, 42 - d3 - d2 + 1)
     );
     const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    const isDayDisabled = (minDate && minDate.month() === m.month())
+      ? (day) => day < minDate.day()
+      : (day) => false;
 
     return (
       <div className={cx('m-calendar', this.props.className)}>
@@ -81,6 +87,7 @@ export default class Calendar extends Component {
                     i={i}
                     d={d}
                     w={w}
+                    disabled={isDayDisabled(i)}
                     onClick={() => this.selectDate(i, w)}
                   />
                 )}
