@@ -7,7 +7,7 @@ import chunk from 'lodash/chunk';
 const Day = ({ i, w, d, disabled, className, ...props }) => {
   const prevMonth = w === 0 && i > 7;
   const nextMonth = w >= 4 && i <= 14;
-  const cls = cx(className, {
+  const cls = cx({
     'prev-month': prevMonth,
     'next-month': nextMonth,
     'current-day': !prevMonth && !nextMonth && i === d,
@@ -57,7 +57,7 @@ export default class Calendar extends Component {
     let { minDate } = this.props;
     minDate = minDate ? moment(minDate) : minDate;
     const isDayDisabled = (minDate && minDate.month() === m.month())
-      ? (day) => day < minDate.day()
+      ? (day) => day < minDate.date()
       : (day) => false;
 
     return (
