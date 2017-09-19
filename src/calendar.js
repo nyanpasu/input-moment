@@ -42,7 +42,6 @@ export default class Calendar extends Component {
   };
 
   render() {
-    const { minDate } = this.props;
     const m = this.props.moment;
     const d = m.date();
     const d1 = m.clone().subtract(1, 'month').endOf('month').date();
@@ -55,6 +54,8 @@ export default class Calendar extends Component {
     );
     const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+    let { minDate } = this.props;
+    minDate = minDate ? moment(minDate) : minDate;
     const isDayDisabled = (minDate && minDate.month() === m.month())
       ? (day) => day < minDate.day()
       : (day) => false;
