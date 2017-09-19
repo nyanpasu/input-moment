@@ -39,6 +39,7 @@ export default class InputMoment extends Component {
       hourStep,
       onSave,
       clock,
+      minDate,
       ...props
     } = this.props;
     const cls = cx('m-input-moment', className);
@@ -71,7 +72,7 @@ export default class InputMoment extends Component {
             onChange={this.props.onChange}
             prevMonthIcon={this.props.prevMonthIcon}
             nextMonthIcon={this.props.nextMonthIcon}
-            minDate={this.props.minDate}
+            minDate={minDate}
           />
           <Time
             className={cx('tab', { 'is-active': tab === 1 })}
