@@ -57,8 +57,8 @@ export default class Calendar extends Component {
     let { minDate } = this.props;
     minDate = minDate ? moment(minDate) : minDate;
     const isDayDisabled = (minDate && minDate.month() === m.month())
-      ? (day) => day < minDate.date()
-      : (day) => false;
+      ? (date) => m.date(date).isBefore(minDate)
+      : (date) => false;
 
     return (
       <div className={cx('m-calendar', this.props.className)}>
@@ -89,7 +89,7 @@ export default class Calendar extends Component {
                     d={d}
                     w={w}
                     disabled={isDayDisabled(i)}
-                    onClick={() => this.selectDate(i, w)}
+                    onClick={isDayDisabled(i) ? null : () => this.selectDate(i, w)}
                   />
                 )}
               </tr>
