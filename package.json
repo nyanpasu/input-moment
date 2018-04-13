@@ -54,7 +54,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangzuo/input-moment.git"
+    "url": "git+https://github.com/nyanpasu/input-moment"
   },
   "keywords": [
     "react",
